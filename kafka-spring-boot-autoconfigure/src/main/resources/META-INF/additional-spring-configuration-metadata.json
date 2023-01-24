@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "kafka.starter.version",
+      "type": "java.lang.String",
+      "description": "The version of Kafka auto-configuration library."
+    },
+    {
+      "name": "kafka.starter.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Enable or disable the Kafka auto-configuration library."
+    }
+  ]
+}

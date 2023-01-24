@@ -1,0 +1,73 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+  kafka:
+    security:
+      protocol: PLAINTEXT
+    ssl:
+      key-store-location:
+      key-store-password:
+      trust-store-location:
+      trust-store-password:
+      key-password:
+    consumer:
+      client-id: test-consumer
+      group-id: test-consumer-group
+      enable-auto-commit: false
+      auto-offset-reset: earliest
+      heartbeat-interval: 3000
+      max-poll-records: 1
+      key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    producer:
+      client-id: test-producer
+      acks: all
+      retries: 5
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+  task:
+    execution:
+      thread-name-prefix: record-processor-
+      shutdown:
+        await-termination: true
+        await-termination-period: 1000ms
+
+kafka:
+  starter:
+    version: 0.1
+    enabled: true
+    security:
+      basic-auth-credentials-source: fake
+      basic-auth-user-info: fake
+      sasl-jaas-config: fake
+      sasl-login-callback-handler-class: fake
+      sasl-mechanism: fake
+    consumer:
+      concurrency: 4
+      max-poll-interval: 60000
+      session-timeout: 9000
+      request-timeout: 5000
+      poll-timeout: 5000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      schema-url: mock://mock.com:8081
+      group-id: test-consumer-group
+      client-id-prefix: test-consumer
+      listener-container-id: test-container
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+      block-timeout: 60000
+      request-timeout: 30000
+      schema-url: mock://mock.com:8081
+    topic:
+      name: test-topic
+      partitions: 4
+      replication-factor: 1
+      retry-name: test-topic.retry
+      dlt-name: test-topic.error
+    retry:
+      fixed-backoff: 200
+      max-attempts: 4

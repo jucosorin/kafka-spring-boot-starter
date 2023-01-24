@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.jucosorin</groupId>
+    <artifactId>kafka-spring-boot-starter-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>kafka-spring-boot-starter-core</artifactId>
+  <name>Kafka Spring Starter Core</name>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <artifactId>spring-boot</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-logging</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <!-- Kafka dependencies -->
+    <dependency>
+      <artifactId>spring-kafka</artifactId>
+      <groupId>org.springframework.kafka</groupId>
+      <exclusions>
+        <exclusion>
+          <artifactId>kafka-clients</artifactId>
+          <groupId>org.apache.kafka</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <artifactId>kafka-clients</artifactId>
+      <groupId>org.apache.kafka</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>kafka-client-plugins</artifactId>
+      <exclusions>
+        <exclusion>
+          <artifactId>nimbus-jose-jwt</artifactId>
+          <groupId>com.nimbusds</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>bc-fips</artifactId>
+          <groupId>org.bouncycastle</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>lang-tag</artifactId>
+          <groupId>com.nimbusds</groupId>
+        </exclusion>
+      </exclusions>
+      <groupId>io.confluent</groupId>
+      <version>${kafka.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>kafka-schema-registry-client</artifactId>
+      <groupId>io.confluent</groupId>
+      <version>${confluent.platform.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>kafka-avro-serializer</artifactId>
+      <groupId>io.confluent</groupId>
+      <version>${confluent.platform.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>kafka-json-serializer</artifactId>
+      <groupId>io.confluent</groupId>
+      <version>${confluent.platform.version}</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+</project>
